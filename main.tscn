@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://dd50024sffvcb"]
+
+[ext_resource type="PackedScene" uid="uid://b1vv2tghjnf5u" path="res://glider.tscn" id="1_yf8kf"]
+[ext_resource type="Texture2D" uid="uid://bd06o6mukwy8" path="res://PNG/Dark/texture_07.png" id="2_iyku5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4jdel"]
+sky_top_color = Color(0.239216, 0.658824, 0.929412, 1)
+sky_horizon_color = Color(0.559804, 0.664706, 0.732353, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.559804, 0.664706, 0.732353, 1)
+
+[sub_resource type="Sky" id="Sky_rov6f"]
+sky_material = SubResource("ProceduralSkyMaterial_4jdel")
+
+[sub_resource type="Environment" id="Environment_hjjw1"]
+background_mode = 2
+sky = SubResource("Sky_rov6f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_it3fw"]
+albedo_color = Color(0.541176, 0.458824, 0.364706, 1)
+albedo_texture = ExtResource("2_iyku5")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 2.82843
+
+[sub_resource type="PrismMesh" id="PrismMesh_d4v3o"]
+left_to_right = 1.5
+size = Vector3(5, 1, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 2.4165, 1.58319)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_hjjw1")
+
+[node name="Hoverboard" parent="Node3D" instance=ExtResource("1_yf8kf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12076, 1.0202, 1.82461)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.417835, -0.459473, 0.0544586)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(202.137, 0.0810547, 270.612)
+material = SubResource("StandardMaterial3D_it3fw")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0173087, -2.8847, -16.5062)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+radius = 4.84786
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06968, 0.12475, -0.417031)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PrismMesh_d4v3o")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 20.1652, 0.12475, -0.417031)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PrismMesh_d4v3o")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(0.0342016, 0, -0.999415, 0, 1, 0, 0.999415, 0, 0.0342016, -13.5242, 0.2495, 46.0647)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PrismMesh_d4v3o")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(0.0347774, 0, -0.999395, 0, 1, 0, 0.999395, 0, 0.0347774, -14.0092, 0.711203, 58.0796)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(15.1364, 1, 1)
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(0.0342016, 0, -0.999415, 0, 1, 0, 0.999415, 0, 0.0342016, -13.5242, 1.55939, 66.783)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+mesh = SubResource("PrismMesh_d4v3o")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(0.0347774, 0, -0.999395, 0, 1, 0, 0.999395, 0, 0.0347774, -13.0751, 1.9801, 81.4573)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(19.7064, 0.0756836, 10.2266)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
